@@ -1,7 +1,15 @@
+/* THIS WAS DELETED 
 .app {
   height: 100vh;
   padding: 2.4rem;
   overscroll-behavior-y: none;
   display: flex;
   position: relative;
+} */
+
+.app{
+  padding: 2.4rem;
+  overscroll-behavior-y: none;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
 }
