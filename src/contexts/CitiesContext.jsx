@@ -45,6 +45,7 @@ function CitiesProvider({ children }){
       currentCity, 
       getCity,
       getFlag,
+      getEmoji,
     }}>
       {children}
     </CitiesContext.Provider>
@@ -61,6 +62,16 @@ function getFlag(flag){
   return (
     <img src={`https://flagcdn.com/24x18/${countryCode}.png`} alt='flag' />
   )
+}
+
+function getEmoji(countryCode){
+ 
+    const codePoints = countryCode
+      .toUpperCase()
+      .split("")
+      .map((char) => 127397 + char.charCodeAt());
+    return String.fromCodePoint(...codePoints);
+  
 }
 
 function useCities(){
