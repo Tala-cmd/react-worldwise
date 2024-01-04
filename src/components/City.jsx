@@ -60,7 +60,7 @@ function City() {
         </a>
       </div>
 
-      <div>
+      <div className={styles.buttons}>
         <BackButton />
       </div>
     </div>

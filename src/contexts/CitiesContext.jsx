@@ -38,6 +38,24 @@ function CitiesProvider({ children }){
     }
   }
 
+  async function createCity(newCity){
+    try {
+      setIsLoading(true)
+      const res = await fetch(`${BASE_URL}/cities/`, {
+        method: 'POST',
+        body: JSON.stringify(newCity),
+        headers: {'Content-Type': 'application/json'}
+      });
+      const data = await res.json();
+
+      setCities((cities)=> [...cities, data])
+    } catch {
+      alert("There was an error loading data...");
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return(
     <CitiesContext.Provider value={{
       cities, 
@@ -46,6 +64,7 @@ function CitiesProvider({ children }){
       getCity,
       getFlag,
       getEmoji,
+      createCity,
     }}>
       {children}
     </CitiesContext.Provider>
@@ -65,13 +84,11 @@ function getFlag(flag){
 }
 
 function getEmoji(countryCode){
- 
-    const codePoints = countryCode
-      .toUpperCase()
-      .split("")
-      .map((char) => 127397 + char.charCodeAt());
-    return String.fromCodePoint(...codePoints);
-  
+  const codePoints = countryCode
+    .toUpperCase()
+    .split("")
+    .map((char) => 127397 + char.charCodeAt());
+  return String.fromCodePoint(...codePoints);
 }
 
 function useCities(){
