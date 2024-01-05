@@ -53,7 +53,7 @@ function Form() {
     fetchCityData();
   },[lat, lng, getEmoji])
 
-  function handleSubmit(e){
+  async function handleSubmit(e){
     e.preventDefault()
     console.log('hi')
     if(!cityName || !date) return;
@@ -66,7 +66,7 @@ function Form() {
       notes,
       position: {lat, lng}
     }
-    createCity(newCity)
+    await createCity(newCity)
     navigate('/app/cities')
   }
 
