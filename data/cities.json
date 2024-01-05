@@ -37,18 +37,6 @@
       "id": 98443204
     },
     {
-      "cityName": "Al Kharjah",
-      "country": "Egypt",
-      "emoji": "🇪🇬",
-      "date": "2024-01-04T22:34:25.353Z",
-      "notes": "",
-      "position": {
-        "lat": "25.990961581384372",
-        "lng": "30.339955910111545"
-      },
-      "id": 98443207
-    },
-    {
       "cityName": "Tadmur",
       "country": "Syrian Arab Republic (the)",
       "emoji": "🇸🇾",
@@ -59,6 +47,30 @@
         "lng": "38.80925409894554"
       },
       "id": 98443210
+    },
+    {
+      "cityName": "Bishah",
+      "country": "Saudi Arabia",
+      "emoji": "🇸🇦",
+      "date": "2024-01-05T20:38:13.766Z",
+      "notes": "",
+      "position": {
+        "lat": "19.599181124743616",
+        "lng": "42.66385728740303"
+      },
+      "id": 98443212
+    },
+    {
+      "cityName": "Dalqu",
+      "country": "Sudan (the)",
+      "emoji": "🇸🇩",
+      "date": "2024-01-05T20:42:38.280Z",
+      "notes": "",
+      "position": {
+        "lat": "19.88715191212212",
+        "lng": "31.184303541489246"
+      },
+      "id": 98443213
     }
   ]
 }
