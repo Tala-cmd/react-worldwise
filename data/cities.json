@@ -61,16 +61,76 @@
       "id": 98443212
     },
     {
-      "cityName": "Dalqu",
-      "country": "Sudan (the)",
-      "emoji": "🇸🇩",
-      "date": "2024-01-05T20:42:38.280Z",
+      "cityName": "Istanbul",
+      "country": "Turkiye",
+      "emoji": "🇹🇷",
+      "date": "2024-01-06T13:06:49.917Z",
       "notes": "",
       "position": {
-        "lat": "19.88715191212212",
-        "lng": "31.184303541489246"
+        "lat": "41.106133276164755",
+        "lng": "28.799772007942355"
       },
-      "id": 98443213
+      "id": 98443214
+    },
+    {
+      "cityName": "Yalova",
+      "country": "Turkiye",
+      "emoji": "🇹🇷",
+      "date": "2024-01-06T13:07:00.476Z",
+      "notes": "",
+      "position": {
+        "lat": "40.629951902720755",
+        "lng": "29.264225330986942"
+      },
+      "id": 98443215
+    },
+    {
+      "cityName": "Ad Dawadimi",
+      "country": "Saudi Arabia",
+      "emoji": "🇸🇦",
+      "date": "2024-01-06T13:07:42.323Z",
+      "notes": "",
+      "position": {
+        "lat": "24.98559303312334",
+        "lng": "43.31137584991117"
+      },
+      "id": 98443216
+    },
+    {
+      "cityName": "Aleppo",
+      "country": "Syrian Arab Republic (the)",
+      "emoji": "🇸🇾",
+      "date": "2024-01-06T13:07:48.650Z",
+      "notes": "",
+      "position": {
+        "lat": "36.20511154935642",
+        "lng": "37.06045302343159"
+      },
+      "id": 98443217
+    },
+    {
+      "cityName": "Castello de la Plana",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-01-06T14:02:12.773Z",
+      "notes": "",
+      "position": {
+        "lat": "39.97000000206294",
+        "lng": "-0.03526433927419915"
+      },
+      "id": 98443218
+    },
+    {
+      "cityName": "Karbala",
+      "country": "Iraq",
+      "emoji": "🇮🇶",
+      "date": "2024-01-06T14:03:13.487Z",
+      "notes": "",
+      "position": {
+        "lat": "32.28752762483238",
+        "lng": "44.04984864761774"
+      },
+      "id": 98443219
     }
   ]
 }
