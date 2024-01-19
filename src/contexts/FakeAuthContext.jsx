@@ -21,10 +21,10 @@ function reducer(state, action){
 }
 
 const FAKE_USER = {
-  name: "Jack",
-  email: "jack@example.com",
+  name: "Tala",
+  email: "tala@example.com",
   password: "qwerty",
-  avatar: "https://i.pravatar.cc/100?u=zz",
+  avatar: 'https://cdn2.iconfinder.com/data/icons/avatar-profession-circle/100/avatar_profession_traveler_traveling-512.png'
 };
 
 function AuthProvider({ children }){
