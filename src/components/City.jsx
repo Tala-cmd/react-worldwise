@@ -33,7 +33,7 @@ function City() {
       <div className={styles.row}>
         <h6>City name</h6>
         <h3>
-          <span>{getFlag(emoji)}</span> {cityName}
+        {cityName} {getFlag(emoji)}
         </h3>
       </div>
 
