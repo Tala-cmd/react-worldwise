@@ -77,9 +77,9 @@ input:focus {
   },
 */
 
-@media screen and (min-width: 375px) {
+@media screen and (min-width: 375px) { /* Should be max */
 html {
-  font-size: 50%;
+  font-size: 70%;
 }
 
 body {
