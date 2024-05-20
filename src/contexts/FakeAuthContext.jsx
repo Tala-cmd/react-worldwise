@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 const AuthContext = createContext()
 
@@ -30,6 +30,14 @@ const FAKE_USER = {
 function AuthProvider({ children }){
   const [{user, isAuthenticated}, dispatch] = useReducer(reducer, initialState)
 
+  useEffect(function () {
+    const storedAuthState = localStorage.getItem("user");
+    if (storedAuthState) {
+      const parsedAuthState = JSON.parse(storedAuthState);
+      dispatch({ type: "login", payload: parsedAuthState.user });
+    }
+  }, []);
+
   function login(email, password){
     if(email === FAKE_USER.email && password === FAKE_USER.password) 
     dispatch({ type: 'login', payload: FAKE_USER})
@@ -51,7 +59,7 @@ function AuthProvider({ children }){
 
 function useAuth(){
   const context = useContext(AuthContext)
-  if(context === undefined) throw new Error('AuthContext was used outside AuthProvider')
+  if (context === undefined) throw new Error('AuthContext was used outside AuthProvider')
   return context;
 }
 

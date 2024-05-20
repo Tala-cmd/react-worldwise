@@ -7,7 +7,8 @@ function ProtectedRoute({ children }) {
   const navigate = useNavigate();
 
   useEffect(function(){
-    if(!isAuthenticated) navigate('/')
+    const storedAuthState = localStorage.getItem("user");
+    if(!isAuthenticated && !storedAuthState) navigate('/')
   
   }, [isAuthenticated, navigate])
 

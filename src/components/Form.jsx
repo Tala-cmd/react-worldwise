@@ -1,82 +1,116 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useUrlPosition } from "../hooks/useUrlPosition";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useUlrPosition } from "../hooks/useUrlPosition";
 import Button from "./Button";
 import BackButton from "./BackButton";
-import { useCities } from "../contexts/CitiesContext";
 import Message from "./Message";
 import Spinner from "./Spinner";
-
 import styles from "./Form.module.css";
+import Flag from "./Flag";
+import { useLocalCities } from "../contexts/LocalCitiesContext";
+
 
 const BASE_URL = 'https://api.bigdatacloud.net/data/reverse-geocode-client?'
 function Form() {
-  const { createCity, isLoading, getFlag, getEmoji } = useCities();
-  const [lat, lng] = useUlrPosition();
+  const [lat, lng] = useUrlPosition();
+  const { createCity, getCity, currentCity } = useLocalCities();
+  
   const navigate = useNavigate();
 
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
-  const [isLoadingGeocode, setIsLoadingGeocode] = useState(false);
+  const [countryCode, setCountryCode] = useState("");
+  const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
   const [geocodingError, setGeocodingError] = useState('');
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
-  const [emoji, setEmoji] = useState('');
+
+  const [searchParams] = useSearchParams();
+  
+  const id = searchParams.get("id");
+
+  
+
+  function resetForm() {
+    setCityName("");
+    setCountry("");
+    setCountryCode("");
+    setDate(new Date());
+    setNotes("");
+  }
 
   useEffect(function(){
+
     if(!lat && !lng) return;
     
     async function fetchCityData(){
       try{
-        setIsLoadingGeocode(true);
+        setIsLoadingGeocoding(true);
         setGeocodingError('')
-        const res = await fetch(`${BASE_URL}latitude=${lat}&longitude=${lng}`);
+        const res = await fetch(`${BASE_URL}latitude=${lat}&longitude=${lng}`); // HERE
         const data = await res.json();
 
-        console.log(data)
         if(!data.countryCode){
           throw new Error("That doesn't seem to be a city. Click somewhere else😊")
         }
 
         setCityName(data.city || data.locality || '')
-        setCountry(data.countryName)
-        setEmoji(getEmoji((data.countryCode)))
+        setCountry(data.countryName || '')
+        setCountryCode(data.countryCode || "");
 
-      }catch (err){
+      } catch (err){
         setGeocodingError(err.message)
-      }finally{
-        setIsLoadingGeocode(false)
+      } finally{
+        setIsLoadingGeocoding(false)
       }
     }
     fetchCityData();
-  },[lat, lng, getEmoji])
+  },[lat, lng])
+
+  useEffect(
+    function () {
+      if (!id) return;
+
+      getCity(id);
+
+      const { cityName, country, countryCode, date, notes } = currentCity;
+      setCityName(cityName);
+      setCountry(country);
+      setCountryCode(countryCode);
+      setDate(new Date(date));
+      setNotes(notes);
+    },
+    [id, getCity, currentCity]
+  );
 
   async function handleSubmit(e){
     e.preventDefault()
-    console.log('hi')
+    
     if(!cityName || !date) return;
 
     const newCity = {
       cityName,
       country,
-      emoji,
+      countryCode,
       date,
       notes,
       position: {lat, lng}
     }
+
     await createCity(newCity)
-    navigate('/app/cities')
+    
+    resetForm();
+    navigate("/app/cities");
   }
 
   if(!lat && !lng) return <Message message='Start by clicking somewhere on the map!' />
-  
-  if(isLoadingGeocode) return <Spinner />
+  if(isLoadingGeocoding) return <Spinner />
   if(geocodingError) return <Message message={geocodingError} />
 
   return (
-    <form className={`${styles.form} ${isLoading && styles.loading}` } onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <label htmlFor="cityName">City name</label>
           <input
@@ -84,7 +118,7 @@ function Form() {
               onChange={(e) => setCityName(e.target.value)}
               value={cityName}
           />
-          <span className={styles.flag}>{emoji ? getFlag(emoji) : ''}</span>
+          <span className={styles.flag}><Flag countryCode={countryCode} /></span>
         </div>
 
         <div className={styles.row}>
@@ -102,6 +136,7 @@ function Form() {
               id="notes"
               onChange={(e) => setNotes(e.target.value)}
               value={notes}
+              maxLength="200"
           />
         </div>
 
